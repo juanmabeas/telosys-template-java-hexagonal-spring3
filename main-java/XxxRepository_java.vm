@@ -1,0 +1,45 @@
+## --------------------------------------------------
+#if ( $entity.isJoinEntity() )
+#cancel("No repository class for join entity")
+#end
+## --------------------------------------------------
+#checkId($entity)
+#parse("include/init_var_entity.vm")
+#parse("include/java_header.vm")
+package ${ROOT_PKG}.infrastructure.repositories;
+##---------------------------------------------------------------------------------------
+
+import org.springframework.data.jpa.repository.*;
+
+import ${ROOT_PKG}.domain.entities.${jpaEntityClass};
+#if ( $entity.hasCompositePrimaryKey() )
+import ${ROOT_PKG}.domain.entities.${jpaEntityIdClass};
+#else
+#foreach( $import in $java.imports($entity.keyAttributes) )
+import $import;
+#end
+#end
+
+/**
+ * Spring Data JPA repository for entity "${jpaEntityClass}" <br> 
+ * 
+ * This repository can be extended by adding specific "finders" methods<br>
+ * To do so, see the "predicates conventions" for "derived query methods" in Spring Data documentation
+ * 
+ * @author Telosys
+ *
+ */
+public interface ${jpaEntityClass}Repository extends JpaRepository<${jpaEntityClass}, ${jpaEntityIdClass}> {
+
+	// Insert specific finders here 
+
+	//List<${jpaEntityClass}> findByXxx(String xxx);
+
+	//List<${jpaEntityClass}> findByXxxStartingWith(String xxx);
+
+	//List<${jpaEntityClass}> findByXxxContaining(String xxx);
+
+	//List<${jpaEntityClass}> findByYyy(BigDecimal yyy);
+
+	//List<${jpaEntityClass}> findByXxxContainingAndYyy(String xxx, BigDecimal yyy);
+}

@@ -1,0 +1,29 @@
+## --------------------------------------------------
+#if ( $entity.isJoinEntity() )
+#cancel("No repository class for join entity")
+#end
+## --------------------------------------------------
+#checkId($entity)
+#parse("include/init_var_entity.vm")
+#parse("include/java_header.vm")
+package ${ROOT_PKG}.domain.mapper;
+##---------------------------------------------------------------------------------------
+
+import org.springframework.data.repository.PagingAndSortingRepository;
+
+import ${ROOT_PKG}.domain.entities.${jpaEntityClass};
+import ${ROOT_PKG}.domain.dto.${dtoClass};
+#if ( $entity.hasCompositePrimaryKey() )
+import ${ROOT_PKG}.domain.entities.${jpaEntityIdClass};
+#else
+#foreach( $import in $java.imports($entity.keyAttributes) )
+import $import;
+#end
+#end
+
+public abstract class ${jpaEntityClass}Mapper {
+
+    public abstract ${jpaEntityClass} getEntity(${dtoClass} ${dtoClass}Dto);
+    
+    public abstract ${dtoClass} getDto(${jpaEntityClass} ${jpaEntityClass});
+}

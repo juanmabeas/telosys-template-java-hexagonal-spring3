@@ -1,0 +1,19 @@
+
+#parse("include/java_header.vm")
+##---------------------------------------------------------------------------------------
+package ${ROOT_PKG}.domain.exception;
+
+
+/**
+ * Exception Empty object"
+ *
+ * @author Juan Manuel Beas
+ *
+ */
+public class EmptyException extends Exception {
+
+    public EmptyException(){
+        super("Error: Empty");
+    }
+
+}
